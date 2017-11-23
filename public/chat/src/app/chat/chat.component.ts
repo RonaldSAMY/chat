@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-
-  constructor() { }
+  Username:String = "Ronald";
+  myGroup:FormGroup;
+  constructor(fb:FormBuilder) { 
+    this.myGroup = fb.group({
+      'name':{}
+    });
+  }
 
   ngOnInit() {
   }
