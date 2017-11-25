@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/RonaldSAMY/chat/issues"
   },
-  "homepage": "https://github.com/RonaldSAMY/chat#readme"
+  "homepage": "https://github.com/RonaldSAMY/chat#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "express-socket.io-session": "^1.3.2",
+    "socket.io": "^2.0.4"
+  }
 }
