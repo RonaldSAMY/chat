@@ -1,5 +1,5 @@
-var application = (rout)=>{
-
+var application = (rout,path)=>{
+    
     rout.get('/checkUser', (req, res) => {
         console.log('routing work');
         if(req.session.user){
@@ -7,6 +7,10 @@ var application = (rout)=>{
         }
         return res.json({'user':false});
 
+    });
+
+    rout.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../../chat/dist/index.html'));
     });
 
 }

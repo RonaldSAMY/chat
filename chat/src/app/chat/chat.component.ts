@@ -9,6 +9,7 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 export class ChatComponent implements OnInit {
   Username:String = "Ronald";
   myGroup:FormGroup;
+  showForm:boolean = true;
   constructor(fb:FormBuilder) { 
     this.myGroup = fb.group({
       'name':{}
@@ -16,6 +17,10 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onSubmit(val){
+
   }
 
 }
