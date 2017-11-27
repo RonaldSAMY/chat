@@ -1,3 +1,7 @@
-<p>
-  chat-users works!
-</p>
+<button type="button" class="btn btn-primary" (click)="logout()">logout</button>
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let user of chaterList.chatUserList" (click) = "seslctedUser(user)">
+      {{user.name}} - {{user.sessionId}} - {{user.socketId}}
+  </li>
+</ul>

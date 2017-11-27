@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 
+require('./socket')(server,session);
 //session
 app.use(session);
 app.use(express.static(path.join(__dirname, '../../chat/dist/')));

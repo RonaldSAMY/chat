@@ -2,6 +2,7 @@
   <ul>
     <li *ngFor="let m of messages">{{m}}</li>
   </ul>
+  <p>{{this.chaterList.selectedUser.name}} - {{this.chaterList.selectedUser.socketId}}</p>
 </div>
 <form [formGroup]="messageFormGroup" (ngSubmit)="onSubmit(messageFormGroup.value)">
   <textarea class="form-control" rows="2" formControlName="message" [(ngModel)]="typemsg"></textarea>

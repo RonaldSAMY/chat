@@ -10,5 +10,14 @@
   </div>
   
   <ng-template #chat>
-    <app-chat-users></app-chat-users>
+    <div class="col-md-8 col-md-push-2">
+        <div class="col-md-6">
+            <app-chat-users (getSocket)="socketGet($event)" [chaterList]="chaterList"></app-chat-users>
+        </div>
+        
+        <div class="col-md-6">
+            <app-chat-messages [chaterList]="chaterList"></app-chat-messages>
+        </div>
+    </div>
+    
 </ng-template>

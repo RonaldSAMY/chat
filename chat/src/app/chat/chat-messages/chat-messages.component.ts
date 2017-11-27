@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+
 import {FormGroup, FormBuilder} from '@angular/forms';
+import { Component, OnInit,Input } from '@angular/core';
+
+import { ChatUserList} from '../chat-user-list.model';
 @Component({
   selector: 'app-chat-messages',
   templateUrl: './chat-messages.component.html',
@@ -9,7 +12,8 @@ export class ChatMessagesComponent implements OnInit {
 
   messageFormGroup:FormGroup;
   showForm:boolean = false;
-
+  @Input() selectedUser;
+  @Input() chaterList:ChatUserList;
   messages : Array<any> = [];
   typemsg:String ="yooo";
   constructor(fb:FormBuilder) { 
@@ -17,9 +21,15 @@ export class ChatMessagesComponent implements OnInit {
       'message':''
     });
   }
+  
 
   ngOnInit() {
+    console.log(this.chaterList.selectedUser);
   }
+  /*
+
+<h2>Slected User : {{selectedUserForMessage.name}} -- {{selectedUserForMessage.socketId}}</h2>
+  */
 
   onSubmit(val)
   {
