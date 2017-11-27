@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {FormGroup, FormBuilder} from '@angular/forms';
 @Component({
   selector: 'app-chat-messages',
   templateUrl: './chat-messages.component.html',
@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatMessagesComponent implements OnInit {
 
-  constructor() { }
+  messageFormGroup:FormGroup;
+  showForm:boolean = false;
+
+  messages : Array<any> = [];
+  typemsg:String ="yooo";
+  constructor(fb:FormBuilder) { 
+    this.messageFormGroup = fb.group({
+      'message':''
+    });
+  }
 
   ngOnInit() {
+  }
+
+  onSubmit(val)
+  {
+    this.messages.push(val.message);
+    this.typemsg = '';
+    console.log(val.message);
   }
 
 }

@@ -1,3 +1,9 @@
-<p>
-  chat-messages works!
-</p>
+<div class="message-box">
+  <ul>
+    <li *ngFor="let m of messages">{{m}}</li>
+  </ul>
+</div>
+<form [formGroup]="messageFormGroup" (ngSubmit)="onSubmit(messageFormGroup.value)">
+  <textarea class="form-control" rows="2" formControlName="message" [(ngModel)]="typemsg"></textarea>
+  <button type="button" class="btn btn-default" type="submit">Default</button>
+</form>
