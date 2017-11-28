@@ -18,7 +18,7 @@ var socket = (server,session) => {
         io.emit('user',val);
 
         io.on('msg',(msg) => {
-            console.log(msg);
+            console.log('got message from cleint');
         })
 
     });

@@ -20,7 +20,7 @@ export class ChatUsersComponent implements OnInit {
   constructor(public chatS:ChatService) {
     this.socket = io();
 
-    this.getSocket.emit('this.socket');
+    
 
     this.chatS.getUser().then(
       (user)=>{
@@ -50,7 +50,7 @@ export class ChatUsersComponent implements OnInit {
   }
   
   ngOnInit() {
-    
+    this.getSocket.emit(this.socket);
   }
 
   logout()

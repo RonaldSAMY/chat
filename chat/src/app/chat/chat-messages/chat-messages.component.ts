@@ -14,6 +14,7 @@ export class ChatMessagesComponent implements OnInit {
   showForm:boolean = false;
   @Input() selectedUser;
   @Input() chaterList:ChatUserList;
+  @Input() socket;
   messages : Array<any> = [];
   typemsg:String ="yooo";
   constructor(fb:FormBuilder) { 
@@ -25,6 +26,7 @@ export class ChatMessagesComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.chaterList.selectedUser);
+    console.log(this.socket);
   }
   /*
 
@@ -35,7 +37,12 @@ export class ChatMessagesComponent implements OnInit {
   {
     this.messages.push(val.message);
     this.typemsg = '';
-    console.log(val.message);
+    //console.log(val.message);
+    console.log(this.socket);
+    this.socket.to(this.chaterList.selectedUser.socketId).emit(
+      'msg','my message'
+    )
+    this.socket.emit('msg','from client');
   }
 
 }

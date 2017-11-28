@@ -14,6 +14,7 @@ export class ChatComponent implements OnInit {
   Username:String = "Ronald";
   myGroup:FormGroup;
   showForm:boolean = true;
+  socket:object;
 
   selectedUserForMessage:ChatUser = new ChatUser();
   chaterList:ChatUserList = new ChatUserList();
@@ -50,8 +51,9 @@ export class ChatComponent implements OnInit {
   }
 
   socketGet(e){
-    console.log('socket trigerd');
-    e.emit('msg','hello world from client');
+    //console.log(e);
+    this.socket = e;
+    //e.emit('msg','hello world from client');
   }
 
 }
