@@ -18,9 +18,9 @@ var socket = (server,session) => {
         io.emit('user',val);
 
         socket.on('msg', function(msg){
-            console.log('message: ' + msg);
-            userId = socket.handshake.session.user.sessionId
-            console.log(users.getUserById(userId));
+            dstId = msg.to.socketId
+            console.log(msg);
+            io.to(dstId).emit('message',msg);
         });
     });
 }

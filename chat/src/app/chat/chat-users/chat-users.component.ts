@@ -4,6 +4,7 @@ import * as io from 'socket.io-client';
 
 import { ChatUser } from './chat-user.model';
 import { ChatUserList} from '../chat-user-list.model';
+import { ChatConversation } from '../chat-conversation.model';
 
 @Component({
   selector: 'app-chat-users',
@@ -15,16 +16,16 @@ export class ChatUsersComponent implements OnInit {
   currentUser:ChatUser;
 
   @Input() chaterList:ChatUserList;
+  @Input() chaterConversations:Array<ChatConversation>;
   @Output() getSocket = new EventEmitter();
   
   constructor(public chatS:ChatService) {
     this.socket = io();
 
-    
-
     this.chatS.getUser().then(
       (user)=>{
         this.currentUser = Object.assign(new ChatUser(),user.currentUser);
+        this.chaterList.currentUser = this.currentUser;
         console.log(this.currentUser);
       }
     );
@@ -36,8 +37,10 @@ export class ChatUsersComponent implements OnInit {
       keys.forEach((key)=>{
           var u:ChatUser = Object.assign(new ChatUser(),key);
           if(this.currentUser.sessionId != u.sessionId){
-            //this.usersList.push(u);
             this.chaterList.chatUserList.push(u);
+            if(typeof(this.chaterConversations[u.sessionId.toString()]) == 'undefined'){
+              this.chaterConversations[u.sessionId.toString()] = new ChatConversation(u);
+            }
           }
 
           if(typeof(this.chaterList.selectedUser.sessionId) != 'undefined'){
@@ -62,6 +65,8 @@ export class ChatUsersComponent implements OnInit {
 
   seslctedUser(user:ChatUser){
     this.chaterList.selectedUser = user;
+    console.log(this.chaterConversations[user.sessionId.toString()]);
+    this.chaterList.currentConversation = this.chaterConversations[user.sessionId.toString()];
     //this.selectedUserForMessage = user;
   }
 

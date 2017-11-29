@@ -12,11 +12,11 @@
   <ng-template #chat>
     <div class="col-md-8 col-md-push-2">
         <div class="col-md-6">
-            <app-chat-users (getSocket)="socketGet($event)" [chaterList]="chaterList"></app-chat-users>
+            <app-chat-users (getSocket)="socketGet($event)" [chaterList]="chaterList" [chaterConversations]="chaterConversations"></app-chat-users>
         </div>
         
         <div class="col-md-6">
-            <app-chat-messages [chaterList]="chaterList" [socket]="socket"></app-chat-messages>
+            <app-chat-messages [chaterList]="chaterList" [socket]="socket" [chaterConversations]="chaterConversations"></app-chat-messages>
         </div>
     </div>
     

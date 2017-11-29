@@ -4,6 +4,7 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 import { ChatService } from './chat.service';
 import { ChatUser } from './chat-users/chat-user.model';
 import { ChatUserList } from './chat-user-list.model';
+import { ChatConversation } from './chat-conversation.model';
 
 @Component({
   selector: 'app-chat',
@@ -18,8 +19,7 @@ export class ChatComponent implements OnInit {
 
   selectedUserForMessage:ChatUser = new ChatUser();
   chaterList:ChatUserList = new ChatUserList();
-
-  
+  chaterConversations:Array<ChatConversation> = [];
 
   constructor(fb:FormBuilder, public cs:ChatService) { 
     this.myGroup = fb.group({
@@ -47,6 +47,7 @@ export class ChatComponent implements OnInit {
   selectedUser(user)
   {
     this.selectedUserForMessage = user;
+    //this.chaterConversations.dstUser = user;
     console.log(user);
   }
 

@@ -1,8 +1,9 @@
+<h1>USER NAME : {{chaterList.currentUser.name}}</h1>
 <div class="message-box">
   <ul>
-    <li *ngFor="let m of messages">{{m}}</li>
+    <li *ngFor="let m of msg">{{m.message}}</li>
   </ul>
-  <p>{{this.chaterList.selectedUser.name}} - {{this.chaterList.selectedUser.socketId}}</p>
+  <p (click) ="currentchat()">{{chaterList.selectedUser.name}}</p>
 </div>
 <form [formGroup]="messageFormGroup" (ngSubmit)="onSubmit(messageFormGroup.value)">
   <textarea class="form-control" rows="2" formControlName="message" [(ngModel)]="typemsg"></textarea>

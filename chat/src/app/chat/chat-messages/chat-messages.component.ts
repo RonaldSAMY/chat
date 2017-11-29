@@ -3,6 +3,9 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 import { Component, OnInit,Input } from '@angular/core';
 
 import { ChatUserList} from '../chat-user-list.model';
+import { ChatMessage } from './chat-message.model';
+import { ChatConversation } from '../chat-conversation.model';
+
 @Component({
   selector: 'app-chat-messages',
   templateUrl: './chat-messages.component.html',
@@ -15,37 +18,47 @@ export class ChatMessagesComponent implements OnInit {
   @Input() selectedUser;
   @Input() chaterList:ChatUserList;
   @Input() socket;
-  messages : Array<any> = [];
+  @Input() chaterConversations:Array<ChatConversation>;
+
   typemsg:String ="yooo";
+  msg:any;
   constructor(fb:FormBuilder) { 
     this.messageFormGroup = fb.group({
       'message':''
     });
   }
   
-
   ngOnInit() {
     console.log(this.chaterList.selectedUser);
-    this.socket.on('mesg',(data)=>{
-      console.log(data);
+    console.log(this.chaterList.currentConversation);
+    this.socket.on('message',(data)=>{
+      var msg:ChatMessage = Object.assign(new ChatMessage(),data);
+      var conversation:ChatConversation = this.chaterConversations[msg.from.sessionId.toString()];
+      conversation.addToConversation(msg);
+     // this.chatConver.addToConversation(msg);
+      console.log('got message');
     });
-    
-  }
-  /*
 
-<h2>Slected User : {{selectedUserForMessage.name}} -- {{selectedUserForMessage.socketId}}</h2>
-  */
+    this.msg = this.chaterList.currentConversation.getConversation();
+  }
+
+  currentchat()
+  {
+    console.log(this.chaterList.currentConversation);
+  }
 
   onSubmit(val)
   {
-    this.messages.push(val.message);
-    this.typemsg = '';
-    //console.log(val.message);
-    console.log(this.socket);
+    var chatMsg:ChatMessage = new ChatMessage();
+    chatMsg.message = val.message;
+    chatMsg.to = this.chaterList.selectedUser;
+    chatMsg.from = this.chaterList.currentUser;
+    var conversation:ChatConversation = this.chaterConversations[this.chaterList.selectedUser.sessionId.toString()];
+    conversation.addToConversation(chatMsg);
     this.socket.emit(
-      'msg','my message'
-    )
-    
+      'msg',chatMsg
+    );
+    this.msg = this.chaterList.currentConversation.getConversation();
   }
 
 }
