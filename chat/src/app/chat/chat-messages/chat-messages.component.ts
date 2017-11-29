@@ -26,7 +26,10 @@ export class ChatMessagesComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.chaterList.selectedUser);
-    console.log(this.socket);
+    this.socket.on('mesg',(data)=>{
+      console.log(data);
+    });
+    
   }
   /*
 
@@ -39,10 +42,10 @@ export class ChatMessagesComponent implements OnInit {
     this.typemsg = '';
     //console.log(val.message);
     console.log(this.socket);
-    this.socket.to(this.chaterList.selectedUser.socketId).emit(
+    this.socket.emit(
       'msg','my message'
     )
-    this.socket.emit('msg','from client');
+    
   }
 
 }

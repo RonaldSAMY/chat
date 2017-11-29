@@ -47,8 +47,10 @@ export class ChatUsersComponent implements OnInit {
           }
       });
     });
+
+    this.socket.emit('mesg','hello world');
   }
-  
+
   ngOnInit() {
     this.getSocket.emit(this.socket);
   }

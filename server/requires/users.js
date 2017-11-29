@@ -16,6 +16,10 @@ var users = {
             return true;
         }
         return false;
+    },
+
+    getUserById : (id) => {
+        return users.users[id];
     }
 
 

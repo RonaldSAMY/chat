@@ -17,10 +17,11 @@ var socket = (server,session) => {
         val = JSON.stringify(user);
         io.emit('user',val);
 
-        io.on('msg',(msg) => {
-            console.log('got message from cleint');
-        })
-
+        socket.on('msg', function(msg){
+            console.log('message: ' + msg);
+            userId = socket.handshake.session.user.sessionId
+            console.log(users.getUserById(userId));
+        });
     });
 }
 
