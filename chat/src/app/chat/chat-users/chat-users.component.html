@@ -1,7 +1,7 @@
 <button type="button" class="btn btn-primary" (click)="logout()">logout</button>
 
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let user of chaterList.chatUserList" (click) = "seslctedUser(user)">
+  <li class="list-group-item" *ngFor="let user of chaterList.chatUserList" (click) = "seslctedUser(user)" [ngClass]="{'active':selectedUserVerif(chaterList.selectedUser,user)}">
       {{user.name}} - {{user.sessionId}} - {{user.socketId}}
   </li>
 </ul>

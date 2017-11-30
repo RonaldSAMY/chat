@@ -58,6 +58,12 @@ export class ChatUsersComponent implements OnInit {
     this.getSocket.emit(this.socket);
   }
 
+  selectedUserVerif(selectedUser:ChatUser,cUser:ChatUser){
+    if(selectedUser.sessionId == cUser.sessionId){
+      return true;
+    }
+    return false;
+  }
   logout()
   {
     return this.chatS.logout();

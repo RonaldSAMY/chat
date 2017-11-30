@@ -31,21 +31,29 @@ export class ChatMessagesComponent implements OnInit {
   ngOnInit() {
     console.log(this.chaterList.selectedUser);
     console.log(this.chaterList.currentConversation);
+    this.msg = this.chaterList.currentConversation.getConversation();
     this.socket.on('message',(data)=>{
       var msg:ChatMessage = Object.assign(new ChatMessage(),data);
       var conversation:ChatConversation = this.chaterConversations[msg.from.sessionId.toString()];
       conversation.addToConversation(msg);
      // this.chatConver.addToConversation(msg);
-      console.log('got message');
+      this.msg = this.chaterList.currentConversation.getConversation();
+      console.log('got messages thank you');
     });
-
-    this.msg = this.chaterList.currentConversation.getConversation();
+    
   }
 
-  currentchat()
-  {
-    console.log(this.chaterList.currentConversation);
+  checkMessage(msg:ChatMessage){
+    if(msg.from.sessionId == this.chaterList.currentUser.sessionId)
+    {
+      console.log('checkuser : true '+ this.chaterList.currentUser.sessionId);
+      return true;//current user send msg
+      
+    }
+    console.log('checkuser : false '+ this.chaterList.currentUser.sessionId);
+    return false;//destination user send message
   }
+
 
   onSubmit(val)
   {
@@ -59,6 +67,7 @@ export class ChatMessagesComponent implements OnInit {
       'msg',chatMsg
     );
     this.msg = this.chaterList.currentConversation.getConversation();
+    this.typemsg = "";
   }
 
 }
